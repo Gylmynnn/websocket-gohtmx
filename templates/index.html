@@ -2,14 +2,46 @@
 <html lang="en">
 
 <head>
+    <script src="https://unpkg.com/htmx.org@2.0.4"
+        integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
+        crossorigin="anonymous"></script>
+
+    <script src="https://unpkg.com/htmx-ext-ws@2.0.2"
+        integrity="sha384-vuKxTKv5TX/b3lLzDKP2U363sOAoRo5wSvzzc3LJsbaQRSBSS+3rKKHcOx5J8doU"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Go HTMX</title>
+
+    <style type="text/tailwindcss">
+        @theme {
+        --color-black: #141b1e;
+        --color-red: #e57474;
+        --color-green: #8ccf7e;
+        --color-yellow: #e5c76b;
+        --color-blue: #67b0e8;
+        --color-cyan: #6cbfbf;
+        --color-grey: #232a2d;
+        --color-white: #dadada;
+      }
+    </style>
 </head>
 
 <body>
-    <p>Hallo world</p>
-    <span>Hallo</span>
+    <p class="text-xl font-bold text-red p-4">CHAT</p>
+    <div hx-ext="ws" ws-connection="/ws" class="relative">
+        <div class="flex bg-gray">
+            <ul id="chat_room" hx-swap="beforeend" hx-swap-oob="beforeend">
+                <p>test</p>
+            </ul>
+        </div>
+        <form id="form" ws-send hx-reset-on-success class="p-3 gap-3 fixed bottom-0 w-full flex">
+            <input name="text" type="text" class=" w-full rounded-sm border-2 border-gray-300 p-2"
+                placeholder="Type your message">
+            <button type="submit" class=" rounded-sm bg-[#67B0E8] text-black px-4 py-2">Send</button>
+        </form>
+    </div>
 </body>
 
 </html>
